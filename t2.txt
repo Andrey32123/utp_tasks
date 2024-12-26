@@ -1,0 +1,66 @@
+abstract class Student {
+    private String fullName; // ФИО
+    private int course; // Курс
+    private double lastExamScore; // Оценка за последний экзамен
+
+    // Конструктор
+    public Student(String fullName, int course, double lastExamScore) {
+        this.fullName = fullName;
+        this.course = course;
+        this.lastExamScore = lastExamScore;
+    }
+
+    // Абстрактный метод
+    public abstract void writeExam();
+
+    // Геттеры для получения информации о студенте
+    public String getFullName() {
+        return fullName;
+    }
+
+    public int getCourse() {
+        return course;
+    }
+
+    public double getLastExamScore() {
+        return lastExamScore;
+    }
+}
+class IUStudent extends Student {
+    
+    public IUStudent(String fullName, int course, double lastExamScore) {
+        super(fullName, course, lastExamScore);
+    }
+
+    @Override
+    public void writeExam() {
+        System.out.println(getFullName() + " с курса " + getCourse() + " направления ИУ пишет экзамен.");
+    }
+}
+
+class MathStudent extends Student {
+    
+    public MathStudent(String fullName, int course, double lastExamScore) {
+        super(fullName, course, lastExamScore);
+    }
+
+    @Override
+    public void writeExam() {
+        System.out.println(getFullName() + " с курса " + getCourse() + " направления Математика пишет экзамен.");
+    }
+}
+public class Main {
+    public static void main(String[] args) {
+        // Создаем экземпляры студентов
+        Student student1 = new IUStudent("Иванов Иван Иванович", 2, 4.5);
+        Student student2 = new MathStudent("Петров Петр Петрович", 3, 5.0);
+
+        // Вызываем метод writeExam для каждого студента
+        student1.writeExam();
+        student2.writeExam();
+        
+        // Дополнительно можем вывести оценки
+        System.out.println(student1.getFullName() + " имеет оценку за последний экзамен: " + student1.getLastExamScore());
+        System.out.println(student2.getFullName() + " имеет оценку за последний экзамен: " + student2.getLastExamScore());
+    }
+}
