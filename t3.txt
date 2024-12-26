@@ -1,0 +1,63 @@
+import java.util.Arrays;
+
+public class StringArray {
+    private String[] strings;
+    private int size;
+    public StringArray() {
+        strings = new String[10]; 
+        size = 0;
+    }
+    public void add(String str) {
+        if (size == strings.length) {
+            resize();
+        }
+        strings[size] = str;
+        size++;
+        Arrays.sort(strings, 0, size, (s1, s2) -> Integer.compare(s1.length(), s2.length()));
+    }
+    private void resize() {
+        strings = Arrays.copyOf(strings, strings.length * 2);
+    }
+    public String getMaxLengthString() {
+        if (size == 0) {
+            return null; 
+        }
+        return strings[size - 1];
+    }
+    public double getAverageLength() {
+        if (size == 0) {
+            return 0; 
+        }
+        
+        int totalLength = 0;
+        for (int i = 0; i < size; i++) {
+            totalLength += strings[i].length();
+        }
+        return (double) totalLength / size;
+    }
+    public void printStrings() {
+        for (int i = 0; i < size; i++) {
+            System.out.println(strings[i]);
+        }
+    }
+}
+public class Main {
+    public static void main(String[] args) {
+        StringArray stringArray = new StringArray();
+
+        stringArray.add("el1");
+        stringArray.add("el2");
+        stringArray.add("el3");
+        stringArray.add("el4");
+        stringArray.add("el5");
+
+        System.out.println("Содержимое массива строк:");
+        stringArray.printStrings();
+
+        String maxLengthString = stringArray.getMaxLengthString();
+        System.out.println("Строка с максимальной длиной: " + maxLengthString);
+
+        double averageLength = stringArray.getAverageLength();
+        System.out.println("Средняя длина строк: " + averageLength);
+    }
+}
